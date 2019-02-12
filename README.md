@@ -82,6 +82,14 @@ In order to demonstrate the data being consumed remotely to the VPC like it woul
       <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/s3-endpoint.png">
     </p>
 1. Click **Create Endpoint**
+1. Click **Close**
+
+</details>
+
+<details>
+<summary><strong>Setup a Glue IAM Role</strong></summary><p>
+
+</details>
 
 <summary><strong>Setup a Glue Connection</strong></summary><p>
 
@@ -99,7 +107,15 @@ In order to transfer the data from the on-premesis database we need to setup a g
     ```
     jdbc:mysql://52.212.137.195:3306/employees
     ```
+1. Enter **Username**, *dbuser* and **Password**, *password12345*
+1. Select your **VPC** 
+1. Select any **Subnet** 
+1. Select the **Security Group** with the name **Default** and choose **Next**
+1. Click **Finish**
 
+</details>
+
+<summary><strong>Test the Glue Connection</strong></summary><p>
 
 </details>
 
