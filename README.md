@@ -1,7 +1,7 @@
 # Overview
 In this lab you'll learn how to extract data from a local relational database, transform the content into parquet format and store on S3 using Glue. Finally you will use AWS QuickSight to visualise the data to gain insight.
 
-## Setup
+# Setup
 <details>
 <summary><strong>Generate a KeyPair</strong></summary><p>
 
@@ -25,5 +25,16 @@ In this lab you'll learn how to extract data from a local relational database, t
     </p>
 
 **Note** If you are running windows you need to follow [these instructions](https://aws.amazon.com/premiumsupport/knowledge-center/convert-pem-file-into-ppk/) to convert the key to putty.
+
+</details>
+
+<details>
+<summary><strong>Deploy a database to mimic on-premesis</strong></summary><p>
+
+To demonstrate the data being held in a different location we'll build our fake database in the Ireland region using CloudFormation.
+
+| AWS Region | Short name | | 
+| -- | -- | -- |
+| EU West (Ireland) | eu-west-1 | [![cloudformation-launch-button](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=Production&templateURL=https://s3-eu-west-1.amazonaws.com/aws-shared-demo-cf-templates/fake-database/master_template.yaml) |
 
 </details>
