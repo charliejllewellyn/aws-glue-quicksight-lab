@@ -79,7 +79,9 @@ In order to demonstrate the data being consumed remotely to the VPC like it woul
 1. Type the **Name** *on-prem-database*
 1. Select **JDBC** as the **Connection Type** and click **Next**
 1. For the JDBC connection enter the following string replacing the **IP_ADDRESS** with the IP address recorded from the cloudformation stack output, e.g.
-    ```jdbc:mysql://52.212.137.195:3306/employees```
+    ```
+    jdbc:mysql://52.212.137.195:3306/employees
+    ```
 
 
 </details>
