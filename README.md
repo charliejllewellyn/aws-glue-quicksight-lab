@@ -19,7 +19,7 @@ In this lab you'll learn how to extract data from a local relational database, t
       <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/Key_Pair_menu.png">
     </p>
 
-1. Click the **Create Key Pair** button and enter a name for the *ks-keypair* for the demo. This will download the private key to your local machine.
+1. Click the **Create Key Pair** button and enter a name for the *glue-lab* for the demo. This will download the private key to your local machine.
     <p align="left">
       <img width="400" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/Create_key_pair.png">
     </p>
@@ -33,8 +33,21 @@ In this lab you'll learn how to extract data from a local relational database, t
 
 To demonstrate the data being held in a different location we'll build our fake database in the Ireland region using CloudFormation.
 
+Click the button below to deploy the stack.
+
 | AWS Region | Short name | | 
 | -- | -- | -- |
-| EU West (Ireland) | eu-west-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=Production&templateURL=https://s3-eu-west-1.amazonaws.com/aws-shared-demo-cf-templates/fake-database/master_template.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png"></a> |
+| EU West (Ireland) | eu-west-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=fakedb&templateURL=https://s3-eu-west-1.amazonaws.com/aws-shared-demo-cf-templates/fake-database/master_template.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png"></a> |
+
+1. On the next page click **Next**
+1. Enter the **KeyPairName** name created above *glue-lab* and click **Next**
+1. click **Next**
+1. Check the last two boxes:
+    - *I acknowledge that AWS CloudFormation might create IAM resources with custom names.*
+    - *I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND*
+1. Click **Create Stack**
+1. Wait for the stack to return **CREATION_COMPLETE** and then click the **Outputs** tab and record the database server IP address.
+
+**Note:** In reality the IP would be a private address access via a VPN on Direct Connect.
 
 </details>
