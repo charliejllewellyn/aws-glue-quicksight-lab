@@ -50,6 +50,9 @@ Click the button below to deploy the stack.
     </p>
 1. Click **Create Stack**
 1. Wait for the stack to return **CREATION_COMPLETE** and then click the **Outputs** tab and record the database server IP address.
+    <p align="left">
+      <img width="500" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/cloudformation-output.png">
+    </p>
 
 **Note:** In reality the IP would be a private address access via a VPN on Direct Connect.
 
