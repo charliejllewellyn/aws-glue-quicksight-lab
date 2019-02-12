@@ -2,15 +2,12 @@
 In this lab you'll learn how to extract data from a local relational database, transform the content into parquet format and store on S3 using Glue. Finally you will use AWS QuickSight to visualise the data to gain insight.
 
 ## Setup
+<details>
+<summary><strong>Generate a KeyPair</strong></summary><p>
 
-### Pre-requisits
-
-*Generate a Keypair*
+**Generate a Keypair**
 
 **Note** If you are using windows 7 or earlier you will need to download and install Putty and Puttygen from [here](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
-
-<details>
-<summary><strong>Detailed Steps</strong></summary><p>
 
 1. From the AWS console search for EC2 in the search box and select the service.
     <p align="left">
