@@ -91,6 +91,7 @@ In order to demonstrate the data being consumed remotely to the VPC like it woul
 
 </details>
 
+<details>
 <summary><strong>Setup a Glue Connection</strong></summary><p>
 
 In order to transfer the data from the on-premesis database we need to setup a glue connection with the database connection details.
