@@ -57,3 +57,38 @@ Click the button below to deploy the stack.
 **Note:** In reality the IP would be a private address access via a VPN on Direct Connect.
 
 </details>
+
+# Data import
+
+## Configuring a Glue Connection
+
+<details>
+<summary><strong>Setup an S3 endpoint</strong></summary><p>
+
+In order to securely transfer data from the on-premesis database to S3 Glue uses an S3 endpoint which allows for data transfer over the AWS backbone once the data reaches your AWS VPC.
+
+In order to demonstrate the data being consumed remotely to the VPC like it would be on-premesis we'll use the London region (eu-west-2).
+
+1. In the top right of the AWS console choose **Ireland** and then select **London** from the dropdown.
+    <p align="left">
+      <img width="500" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/select-region.png">
+    </p>
+**Note:** you can ignore the errors about the stack not existing.
+1. Click on the **Services** dropdown in the top right and select the service **AWS Glue**
+1. On the left-hand menu select **Connections** and click **Add Connection**
+1. Type the **Name** *on-prem-database*
+1. Select **JDBC** as the **Connection Type** and click **Next**
+1. For the JDBC connection enter the following string replacing the **IP_ADDRESS** with the IP address recorded from the cloudformation stack output, e.g.
+    ```jdbc:mysql://52.212.137.195:3306/employees```
+
+
+</details>
+
+<details>
+<summary><strong>Deploy a database to mimic on-premesis</strong></summary><p>
+
+
+
+</details>
+
+## Configure Glue ETL
