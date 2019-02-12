@@ -74,6 +74,19 @@ In order to demonstrate the data being consumed remotely to the VPC like it woul
       <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/select-region.png">
     </p>
 **Note:** you can ignore the errors about the stack not existing.
+1. Click on the **Services** dropdown in the top right and select the service **VPC**
+1. Click on **endpoints** on the left-hand menu
+1. Click on **Create Endpoint**
+1. Place a check next to **com.amazonaws.eu-west-2.s3** and place a check in the routetable starting **rtb-**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/s3-endpoint.png">
+    </p>
+1. Click **Create Endpoint**
+
+<summary><strong>Setup a Glue Connection</strong></summary><p>
+
+In order to transfer the data from the on-premesis database we need to setup a glue connection with the database connection details.
+
 1. Click on the **Services** dropdown in the top right and select the service **AWS Glue**
 1. On the left-hand menu select **Connections** and click **Add Connection**
 1. Type the **Name** *on-prem-database*
@@ -86,13 +99,6 @@ In order to demonstrate the data being consumed remotely to the VPC like it woul
     ```
     jdbc:mysql://52.212.137.195:3306/employees
     ```
-
-
-</details>
-
-<details>
-<summary><strong>Deploy a database to mimic on-premesis</strong></summary><p>
-
 
 
 </details>
