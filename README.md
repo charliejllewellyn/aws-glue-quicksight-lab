@@ -46,7 +46,7 @@ Click the button below to deploy the stack.
     - *I acknowledge that AWS CloudFormation might create IAM resources with custom names.*
     - *I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND*
     <p align="left">
-      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/Cloudformation-approval.png">
+      <img width="500" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/Cloudformation-approval.png">
     </p>
 1. Click **Create Stack**
 1. Wait for the stack to return **CREATION_COMPLETE** and then click the **Outputs** tab and record the database server IP address.
