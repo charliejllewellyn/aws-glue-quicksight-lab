@@ -71,7 +71,7 @@ In order to demonstrate the data being consumed remotely to the VPC like it woul
 
 1. In the top right of the AWS console choose **Ireland** and then select **London** from the dropdown.
     <p align="left">
-      <img width="500" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/select-region.png">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/select-region.png">
     </p>
 **Note:** you can ignore the errors about the stack not existing.
 1. Click on the **Services** dropdown in the top right and select the service **AWS Glue**
