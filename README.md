@@ -63,11 +63,9 @@ Click the button below to deploy the stack.
 ## Configuring a Glue Connection
 
 <details>
-<summary><strong>Setup an S3 endpoint</strong></summary><p>
+<summary><strong>Setup a Nat Gateway</strong></summary><p>
 
-In order to securely transfer data from the on-premesis database to S3 Glue uses an S3 endpoint which allows for data transfer over the AWS backbone once the data reaches your AWS VPC.
-
-In order to demonstrate the data being consumed remotely to the VPC like it would be on-premesis we'll use the London region (eu-west-2).
+Glue can only connect to the internet via a Nat Gateway for security. In reality you would be more likely to be routing from a private subnet to a database on-premesis via a VPN. However for this lab we'll configure a VPN Gateway to allow us to connect to the database we deployed with internet access in the previous step.
 
 1. In the top right of the AWS console choose **Ireland** and then select **London** from the dropdown.
     <p align="left">
@@ -75,9 +73,42 @@ In order to demonstrate the data being consumed remotely to the VPC like it woul
     </p>
 **Note:** you can ignore the errors about the stack not existing.
 1. Click on the **Services** dropdown in the top right and select the service **VPC**
+1. Click on **NAT Gateways** on the left-hand menu
+1. Click **Subnet** and selct any subnet
+1. Click **Create New EIP**
+1. Click **Create a NAT Gateway**, **Close**
+1. Click on **Subnets** on the left-hand menu
+1. Click **Create Subnet**
+1. Enter *Glue Private Subnet* for the **Name Tag**
+1. Enter and appropriate CIDR block in the **IPv4 CIDR Block**
+1. Click **Create**
+1. Click on **Route Tables** on the left-hand menu
+1. Click **Create Route Table**
+1. Enter *Glue private route* as the **Name Tag**
+1. Click **Create**, **Close**
+1. Check the route table you just created and select **Subnet Associations** tab at the bottom
+1. Click **Edit subnet associations**
+1. Place a check next to the *Glue Private Subnet*
+1. Click **Save**
+1. Click the **Routes** tab
+1. Click **edit routes**
+1. Click **Add Route**
+1. Enter *0.0.0.0/0* for the **Destination** 
+1. For the **Target** select the *NAT Gateway* you created earlier
+1. Click **Save Routes**, **Close**
+
+</details>
+
+<details>
+<summary><strong>Setup an S3 endpoint</strong></summary><p>
+
+In order to securely transfer data from the on-premesis database to S3 Glue uses an S3 endpoint which allows for data transfer over the AWS backbone once the data reaches your AWS VPC.
+
+In order to demonstrate the data being consumed remotely to the VPC like it would be on-premesis we'll use the London region (eu-west-2).
+
 1. Click on **endpoints** on the left-hand menu
 1. Click on **Create Endpoint**
-1. Place a check next to **com.amazonaws.eu-west-2.s3** and place a check in the routetable starting **rtb-**
+1. Place a check next to **com.amazonaws.eu-west-2.s3** and place a check in the routetable you created in the previous step starting **rtb-**
     <p align="left">
       <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/s3-endpoint.png">
     </p>
@@ -87,7 +118,43 @@ In order to demonstrate the data being consumed remotely to the VPC like it woul
 </details>
 
 <details>
+<summary><strong>Create a security group for Glue</strong></summary><p>
+
+Glue requires access both out of the VPC to connect to the database but also to the glue service and S3.
+
+1. From the left-hand menu click **Security Groups**
+1. Clock **Create security group**
+1. For **Security Group Name** enter *on-prem-glue-demo*
+1. For **Description** enter *Glue demo*
+1. For **VPC** select the *Default VPC*
+1. Click **Create**, then **Close**
+1. Select the security group you just created and copy the **Group Id** to a text doc
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/sg-id.png">
+    </p>
+1. Select **Actions** --> **Edit inbound rules**
+1. Click **Add Rule** and enter **All TCP** for the **Type** 
+1. Enter the **Group Id** recorded above in the field **CIDR, IP, Security Group or Prefix List**
+1. Click **Save rules**, **Close**
+
+</details>
+
+<details>
 <summary><strong>Setup a Glue IAM Role</strong></summary><p>
+
+In order for Glue to run we need to give the service the required permissions to manage infrastructure on our behalf.
+
+1. Click on the **Services** dropdown in the top right and select the service **IAM**
+1. On the left-hand menu select **Roles**
+1. Click **Create Role**
+1. Under **Choose the service that will use this role** select **Glue**
+1. Click **Next: Permissions**
+1. Search for **Glue** and place a check next to **AWSGlueServiceRole**
+1. Next search for **s3** and place a check next to **AmazonS3FullAccess**
+1. Click **Next: Tags**
+1. Click **Next: Review**
+1. Enter *glue-demo-role* for the **Role Name**
+1. Click **Create Role**
 
 </details>
 
@@ -111,12 +178,20 @@ In order to transfer the data from the on-premesis database we need to setup a g
 1. Enter **Username**, *dbuser* and **Password**, *password12345*
 1. Select your **VPC** 
 1. Select any **Subnet** 
-1. Select the **Security Group** with the name **Default** and choose **Next**
+1. Select the **Security Group** with the name **on-prem-glue-demo** and choose **Next**
 1. Click **Finish**
 
 </details>
 
 <summary><strong>Test the Glue Connection</strong></summary><p>
+
+1. Click **Test Connection**
+1. Select the role **glue-demo-role** created previously
+1. Click **Test Connection**
+1. This should result in success (it may take a few minutes)
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-success.png">
+    </p>
 
 </details>
 
