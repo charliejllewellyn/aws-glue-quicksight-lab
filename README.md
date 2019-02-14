@@ -504,5 +504,4 @@ Once the data is available in S3 we can start to query and visualisae the data. 
 # Summary
 During this lab you extracted data from an "on-premesis" database, converted it to Parquet and stored the output to S3. You then used a combination of Athena and QuickSight to query and visualise the data to start exploiting it.
 
-This is a simple lab but could easily be expanded to pull data from multiple sources to start collelating it and gain deeper insight.
-
+This is a simple lab but could easily be expanded to pull data from multiple sources to start corelating it to gain deeper insight.
