@@ -410,3 +410,99 @@ We use a glue crawler to query the data from the database on S3 and create a sch
     </p>
 
 </details>
+
+# Data Visualisation
+
+Once the data is available in S3 we can start to query and visualisae the data. In this section we'll be using AWS QuickSight but other products can be integrated like Tableau, or qlik.
+
+<details>
+<summary><strong>Allow QuickSight access to your data</strong></summary><p>
+
+1. Click on the **Services** dropdown in the top right and select the service **QuickSight**
+1. In the top right-hand corner click **Admin**, **Manage QuickSight**
+    <p align="left">
+      <img width="400" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-perms.png">
+    </p>
+1. In the left-hand menu click **Account Settings**
+1. Click **Manage QuickSight permissions**
+1. Select **Choose S3 buckets**
+1. Place a check next to the bucket you created earlier
+1. Click **Select Buckets** and click **Update**
+
+
+</details>
+
+<details>
+<summary><strong>Prepare the datasource</strong></summary><p>
+
+1. In the top right-hand corner click **N. Virgina** and select **EU (Ireland)**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-region.png">
+    </p>
+1. On the left hand page click **New Analysis**
+1. Click **New dataset**
+1. Select **Athena** and enter *glue-demo* for the **Data source Name**
+1. Click **Create Data Source**
+1. Select **on-prem-employee-database**
+1. Select **employees** as the **Table**
+1. Click **edit preview data**
+1. Click **add data**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-add-data.png">
+    </p>
+1. Select **Salaires** as the table and click **Select**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-add-table.png">
+    </p>
+1. Click on the two circles and under the **Join Clauses** select **emp_no** for both **employees** and **salaries**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-join.png">
+    </p>
+1. Click **Apply**
+1. Click **add data**
+1. Select **dept_manager** as the table, click select
+1. Click on the two circles and under the **Join Clauses** select **emp_no** for both **employees** and **dept_manager**
+1. Click **Apply**
+1. Click **add data**
+1. Select **deptartments** as the table, click select
+1. This time drag the **departments** box over the **dept_manager** box and release when it turns green.
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-new-join.png">
+    </p>
+1. Click on the two circles and under the **Join Clauses** select **dept_no** for both **employees** and **dept_manager**
+1. Click **Apply**
+1. At the top click **Save & Visualise**
+
+</details>
+
+</details>
+
+<details>
+<summary><strong>Build some visualisations</strong></summary><p>
+
+1. Choose your visulisation type, in this case select the **bar chart** icon
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-new-join.png">
+    </p>
+1. From teh left-hand menu select **gender[employees]**
+1. Click the bar saying **Field Wells** at the top
+1. Drag **Salaries** into the **Value** box and then click to select **Aggregate** as **Average**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-vis-1.png">
+    </p>
+1. In the top left you select **Add**, **Add Visual**
+1. This time select **Horizontal bar chart**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-hor-bar.png">
+    </p>
+1. Select **dept_name** from the left-hand menu
+1. Now drag **salary** to the **Value** box in the top bar
+1. Feel free to continue building your own visulaisations to explore the data
+
+</details>
+
+# Summary
+During this lab you extracted data from an "on-premesis" database, converted it to Parquet and stored the output to S3. You then used a combination of Athena and QuickSight to query and visualise the data to start exploiting it.
+
+This is a simple lab but could easily be expanded to pull data from multiple sources to start collelating it and gain deeper insight.
+
