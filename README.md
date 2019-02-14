@@ -195,4 +195,22 @@ In order to transfer the data from the on-premesis database we need to setup a g
 
 </details>
 
+STOP HERE!!
+
 ## Configure Glue ETL
+
+Next we'll configure Glue to perform ETL on the data to convert it to Parquet and store it on S3.
+
+<details>
+<summary><strong>Setup a Glue Connection</strong></summary><p>
+
+1. On the left-hand menu select **Connections** and click **Jobs**
+1. Click **Add Job**
+1. Enter *Glue-demo-job* for the **Name**
+1. Select the **Role** *glue-demo-role*
+1. Change **Type** to **Python Shell**
+1. Click **Next**
+1. Click **Select** Next to **on-prem-database**
+1. Click **Save job and edit script**
+
+</details>
