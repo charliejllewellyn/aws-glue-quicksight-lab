@@ -37,7 +37,7 @@ Click the button below to deploy the stack.
 
 | AWS Region | Short name | | 
 | -- | -- | -- |
-| EU West (Ireland) | eu-west-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=fakedb&templateURL=https://s3-eu-west-1.amazonaws.com/aws-shared-demo-cf-templates/fake-database/master_template.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png"></a> |
+| EU West (London) | eu-west-2 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/new?stackName=fakedb&templateURL=https://s3-eu-west-2.amazonaws.com/aws-shared-demo-cf-templates/fake-database/master_template.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png"></a> |
 
 1. On the next page click **Next**
 1. Enter the **KeyPairName** name created above *glue-lab* and click **Next**
@@ -67,7 +67,7 @@ Click the button below to deploy the stack.
 
 Glue can only connect to the internet via a Nat Gateway for security. In reality you would be more likely to be routing from a private subnet to a database on-premesis via a VPN. However for this lab we'll configure a VPN Gateway to allow us to connect to the database we deployed with internet access in the previous step.
 
-1. In the top right of the AWS console choose **Ireland** and then select **London** from the dropdown.
+1. In the top right of the AWS console choose **London** and then select **Ireland** from the dropdown.
     <p align="left">
       <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/select-region.png">
     </p>
