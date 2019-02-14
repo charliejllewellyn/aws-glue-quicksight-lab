@@ -388,6 +388,9 @@ We use a glue crawler to query the data from the database on S3 and create a sch
 1. Select **Add Crawler**
 1. For **Name** enter *on-prem-database*, click **Next**
 1. In the **Include path** enter the bucket name from earlier, e.g. *s3://firstname-lastname-glue-demo"
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-crawler-datasource.png">
+    </p>
 1. Click **Next**, **Next**
 1. Select **Choose an existing IAM role** and select the role **glue-demo-role**
 1. Click **Next**, **Next**
