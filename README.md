@@ -217,6 +217,7 @@ In order to store the data extracted from the on-premesis database we'll create 
 <details>
 <summary><strong>Setup a Glue Connection</strong></summary><p>
 
+1. Click on the **Services** dropdown in the top right and select the service **AWS Glue**
 1. On the left-hand menu select **Jobs**
 1. Click **Add Job**
 1. Enter *Glue-demo-job* for the **Name**
@@ -368,5 +369,28 @@ In order to store the data extracted from the on-premesis database we'll create 
     ```
 1. Edit lines 11 and 12 so the vairables **s3_bucket_name** and **db_url** reflect the correct values created above.
 1. Click **Save**, **Run Job** and then confirm by clicking **Run Job**
+
+</details>
+
+<details>
+<summary><strong>Create a Glue Crawler</strong></summary><p>
+
+We use a glue crawler to query the data from the database on S3 and create a schema so we can start to interogate the information.
+
+1. From the left-hand menu select **Crawlers**
+1. Select **Add Crawler**
+1. For **Name** enter *on-prem-database*, click **Next**
+1. In the **Include path** enter the bucket name from earlier, e.g. *s3://firstname-lastname-glue-demo"
+1. Click **Next**, **Next**
+1. Select **Choose an existing IAM role** and select the role **glue-demo-role**
+1. Click **Next**, **Next**
+1. Click **Add database** and enter the name *on-prem-employee-database*, click **Create**
+1. Click **Next** and **Finish**
+1. Place a check next to your crawler and click **Run Crawler**
+1. Wait for the crawler to run and then choose **Tables** from the left-hand menu
+1. This should show you the tables for your newly extracted data.
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-tables.png">
+    </p>
 
 </details>
