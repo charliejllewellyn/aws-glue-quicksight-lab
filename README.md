@@ -180,6 +180,9 @@ In order to transfer the data from the on-premesis database we need to setup a g
 1. Select any **Subnet** 
 1. Select the **Security Group** with the name **on-prem-glue-demo** and choose **Next**
 1. Click **Finish**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-connection.png">
+    </p>
 
 </details>
 
@@ -224,6 +227,9 @@ In order to store the data extracted from the on-premesis database we'll create 
 1. Enter *Glue-demo-job* for the **Name**
 1. Select the **Role** *glue-demo-role*
 1. Under **This job runs** select **A new script to be authored by you**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-job-connection.png">
+    </p>
 1. Click **Next**
 1. Under **All Connections** click **Select** next to **on-prem-database**
 1. Click **Save job and edit script**
