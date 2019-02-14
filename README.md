@@ -213,145 +213,145 @@ Next we'll configure Glue to perform ETL on the data to convert it to Parquet an
 1. Under **All Connections** click **Select** next to **on-prem-database**
 1. Click **Save job and edit script**
 1. Paste in the script below
-```
-import sys
-import boto3
-import json
-from awsglue.transforms import *
-from awsglue.utils import getResolvedOptions
-from pyspark.context import SparkContext
-from awsglue.context import GlueContext
-from awsglue.dynamicframe import DynamicFrame
-from awsglue.job import Job
-
-
-## @params: [JOB_NAME]
-args = getResolvedOptions(sys.argv, ['JOB_NAME'])
-
-sc = SparkContext()
-glueContext = GlueContext(sc)
-spark = glueContext.spark_session
-job = Job(glueContext)
-job.init(args['JOB_NAME'], args)
-
-db_username = 'dbuser'
-db_password = 'password12345'
-db_url = 'jdbc:mysql://52.30.96.60:3306/employees'
-
-#Table current_dept_emp
-table_name = 'current_dept_emp'
-s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
-
-# Connecting to the source
-df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
-df.printSchema()
-print df.count()
-datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
-applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("dept_no", "string", "dept_no", "string"), ("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int")], transformation_ctx = "applymapping1")
-resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
-dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
-datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
-
-#Table departments
-table_name = 'departments'
-s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
-
-# Connecting to the source
-df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
-df.printSchema()
-print df.count()
-datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
-applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("dept_no", "string", "dept_no", "string"), ("dept_name", "string", "dept_name", "string")], transformation_ctx = "applymapping1")
-resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
-dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
-datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
-
-#Table dept_emp
-table_name = 'dept_emp'
-s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
-
-# Connecting to the source
-df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
-df.printSchema()
-print df.count()
-datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
-applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("dept_no", "string", "dept_no", "string"), ("dept_name", "string", "dept_name", "string")], transformation_ctx = "applymapping1")
-resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
-dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
-datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
-
-#Table dept_emp_latest_date
-table_name = 'dept_emp_latest_date'
-s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
-
-# Connecting to the source
-df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
-df.printSchema()
-print df.count()
-datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
-applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int")], transformation_ctx = "applymapping1")
-resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
-dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
-datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
-
-#Table dept_manager
-table_name = 'dept_manager'
-s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
-
-# Connecting to the source
-df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
-df.printSchema()
-print df.count()
-datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
-applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("dept_no", "string", "dept_no", "string"), ("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int")], transformation_ctx = "applymapping1")
-resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
-dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
-datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
-
-#Table employees
-table_name = 'employees'
-s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
-
-# Connecting to the source
-df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
-df.printSchema()
-print df.count()
-datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
-applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("gender", "string", "gender", "string"), ("emp_no", "int", "emp_no", "int"), ("birth_date", "date", "birth_date", "date"), ("last_name", "string", "last_name", "string"), ("hire_date", "date", "hire_date", "date"), ("first_name", "string", "first_name", "string")], transformation_ctx = "applymapping1")
-resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
-dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
-datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
-
-#Table salaries
-table_name = 'salaries'
-s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
-
-# Connecting to the source
-df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
-df.printSchema()
-print df.count()
-datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
-applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int"), ("salary", "int", "salary", "int")], transformation_ctx = "applymapping1")
-resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
-dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
-datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
-
-#Table titles
-table_name = 'titles'
-s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
-
-# Connecting to the source
-df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
-df.printSchema()
-print df.count()
-datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
-applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int"), ("title", "string", "title", "string")], transformation_ctx = "applymapping1")
-resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
-dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
-datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
-
-job.commit()
-```
-1. Click **Save job and edit script**
+    ```
+    import sys
+    import boto3
+    import json
+    from awsglue.transforms import *
+    from awsglue.utils import getResolvedOptions
+    from pyspark.context import SparkContext
+    from awsglue.context import GlueContext
+    from awsglue.dynamicframe import DynamicFrame
+    from awsglue.job import Job
+    
+    
+    ## @params: [JOB_NAME]
+    args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+    
+    sc = SparkContext()
+    glueContext = GlueContext(sc)
+    spark = glueContext.spark_session
+    job = Job(glueContext)
+    job.init(args['JOB_NAME'], args)
+    
+    db_username = 'dbuser'
+    db_password = 'password12345'
+    db_url = 'jdbc:mysql://52.30.96.60:3306/employees'
+    
+    #Table current_dept_emp
+    table_name = 'current_dept_emp'
+    s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
+    
+    # Connecting to the source
+    df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
+    df.printSchema()
+    print df.count()
+    datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
+    applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("dept_no", "string", "dept_no", "string"), ("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int")], transformation_ctx = "applymapping1")
+    resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
+    dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
+    datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
+    
+    #Table departments
+    table_name = 'departments'
+    s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
+    
+    # Connecting to the source
+    df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
+    df.printSchema()
+    print df.count()
+    datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
+    applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("dept_no", "string", "dept_no", "string"), ("dept_name", "string", "dept_name", "string")], transformation_ctx = "applymapping1")
+    resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
+    dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
+    datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
+    
+    #Table dept_emp
+    table_name = 'dept_emp'
+    s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
+    
+    # Connecting to the source
+    df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
+    df.printSchema()
+    print df.count()
+    datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
+    applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("dept_no", "string", "dept_no", "string"), ("dept_name", "string", "dept_name", "string")], transformation_ctx = "applymapping1")
+    resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
+    dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
+    datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
+    
+    #Table dept_emp_latest_date
+    table_name = 'dept_emp_latest_date'
+    s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
+    
+    # Connecting to the source
+    df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
+    df.printSchema()
+    print df.count()
+    datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
+    applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int")], transformation_ctx = "applymapping1")
+    resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
+    dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
+    datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
+    
+    #Table dept_manager
+    table_name = 'dept_manager'
+    s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
+    
+    # Connecting to the source
+    df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
+    df.printSchema()
+    print df.count()
+    datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
+    applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("dept_no", "string", "dept_no", "string"), ("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int")], transformation_ctx = "applymapping1")
+    resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
+    dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
+    datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
+    
+    #Table employees
+    table_name = 'employees'
+    s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
+    
+    # Connecting to the source
+    df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
+    df.printSchema()
+    print df.count()
+    datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
+    applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("gender", "string", "gender", "string"), ("emp_no", "int", "emp_no", "int"), ("birth_date", "date", "birth_date", "date"), ("last_name", "string", "last_name", "string"), ("hire_date", "date", "hire_date", "date"), ("first_name", "string", "first_name", "string")], transformation_ctx = "applymapping1")
+    resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
+    dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
+    datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
+    
+    #Table salaries
+    table_name = 'salaries'
+    s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
+    
+    # Connecting to the source
+    df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
+    df.printSchema()
+    print df.count()
+    datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
+    applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int"), ("salary", "int", "salary", "int")], transformation_ctx = "applymapping1")
+    resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
+    dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
+    datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
+    
+    #Table titles
+    table_name = 'titles'
+    s3_output = "s3://cjl-glue-mysql-database-sample" + "/" + table_name
+    
+    # Connecting to the source
+    df = glueContext.read.format("jdbc").option("url", db_url).option("dbtable", table_name).option("user", db_username).option("password", db_password).option("driver","com.mysql.jdbc.Driver").load()
+    df.printSchema()
+    print df.count()
+    datasource0 = DynamicFrame.fromDF(df, glueContext, "datasource0")
+    applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("from_date", "date", "from_date", "date"), ("to_date", "date", "to_date", "date"), ("emp_no", "int", "emp_no", "int"), ("title", "string", "title", "string")], transformation_ctx = "applymapping1")
+    resolvechoice2 = ResolveChoice.apply(frame = applymapping1, choice = "make_struct", transformation_ctx = "resolvechoice2")
+    dropnullfields3 = DropNullFields.apply(frame = resolvechoice2, transformation_ctx = "dropnullfields3")
+    datasink4 = glueContext.write_dynamic_frame.from_options(frame = dropnullfields3, connection_type = "s3", connection_options = {"path": "s3://cjl-glue-mysql-database-sample" + "/" + table_name}, format = "parquet", transformation_ctx = "datasink4")
+    
+    job.commit()
+    ```
+1. Click **Save**, **Run Job**
 
 </details>
