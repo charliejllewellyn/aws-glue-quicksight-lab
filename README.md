@@ -183,6 +183,7 @@ In order to transfer the data from the on-premesis database we need to setup a g
 
 </details>
 
+<details>
 <summary><strong>Test the Glue Connection</strong></summary><p>
 
 1. Click **Test Connection**
