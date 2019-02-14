@@ -395,7 +395,11 @@ We use a glue crawler to query the data from the database on S3 and create a sch
 1. Select **Choose an existing IAM role** and select the role **glue-demo-role**
 1. Click **Next**, **Next**
 1. Click **Add database** and enter the name *on-prem-employee-database*, click **Create**
-1. Click **Next** and **Finish**
+1. Click **Next**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-crawler-details.png">
+    </p>
+1. Click **Finish**
 1. Place a check next to your crawler and click **Run Crawler**
 1. Wait for the crawler to run and then choose **Tables** from the left-hand menu
 1. This should show you the tables for your newly extracted data.
