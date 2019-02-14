@@ -62,6 +62,12 @@ Click the button below to deploy the stack.
 
 ## Configuring a Glue Connection
 
+If you are time constrained you can skip the next **4** steps by running the following CloudFormation template.
+
+| AWS Region | Short name | |
+| -- | -- | -- |
+| EU West (Ireland) | eu-west-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=fakedb&templateURL=https://s3-eu-west-1.amazonaws.com/aws-shared-demo-cf-templates/glue_demo/master_template.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png"></a> |
+
 <details>
 <summary><strong>Setup a Nat Gateway</strong></summary><p>
 
