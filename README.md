@@ -377,6 +377,8 @@ In order to store the data extracted from the on-premesis database we'll create 
 1. Edit lines 11 and 12 so the vairables **s3_bucket_name** and **db_url** reflect the correct values created above.
 1. Click **Save**, **Run Job** and then confirm by clicking **Run Job**
 
+**Note:** you can move onto create the crawler whilst the job is runnning, **but** make sure the job is complete before you run the crawler
+
 </details>
 
 <details>
