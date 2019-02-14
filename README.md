@@ -195,11 +195,24 @@ In order to transfer the data from the on-premesis database we need to setup a g
 
 </details>
 
-STOP HERE!!
-
 ## Configure Glue ETL
 
 Next we'll configure Glue to perform ETL on the data to convert it to Parquet and store it on S3.
+
+<details>
+<summary><strong>Create an S3 bucket</strong></summary><p>
+
+In order to store the data extracted from the on-premesis database we'll create an S3 bucket.
+
+1. Click on the **Services** dropdown in the top right and select the service **S3**
+1. Click **Create Bucket**
+1. Enter a unique name for the bucket e.g. *firstname-lastname-glue-demo*
+1. Click **Create**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/s3-setup.png">
+    </p>
+
+</details>
 
 <details>
 <summary><strong>Setup a Glue Connection</strong></summary><p>
@@ -353,6 +366,7 @@ Next we'll configure Glue to perform ETL on the data to convert it to Parquet an
     
     job.commit()
     ```
+1. Edit lines 11 and 12 so the vairables **s3_bucket_name** and **db_url** reflect the correct values created above.
 1. Click **Save**, **Run Job** and then confirm by clicking **Run Job**
 
 </details>
