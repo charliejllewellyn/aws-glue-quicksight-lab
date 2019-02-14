@@ -37,7 +37,7 @@ Click the button below to deploy the stack.
 
 | AWS Region | Short name | | 
 | -- | -- | -- |
-| EU West (London) | eu-west-2 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/new?stackName=fakedb&templateURL=https://s3-eu-west-2.amazonaws.com/aws-shared-demo-cf-templates/fake-database/master_template.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png"></a> |
+| EU West (London) | eu-west-2 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/new?stackName=fakedb&templateURL=https://s3-eu-west-1.amazonaws.com/aws-shared-demo-cf-templates/fake-database/master_template.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png"></a> |
 
 1. On the next page click **Next**
 1. Enter the **KeyPairName** name created above *glue-lab* and click **Next**
