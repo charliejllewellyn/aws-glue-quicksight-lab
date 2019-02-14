@@ -391,7 +391,7 @@ We use a glue crawler to query the data from the database on S3 and create a sch
 1. For **Name** enter *on-prem-database*, click **Next**
 1. In the **Include path** enter the bucket name from earlier, e.g. *s3://firstname-lastname-glue-demo"
     <p align="left">
-      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-crawler-datasource.png">
+      <img width="400" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-crawler-datasource.png">
     </p>
 1. Click **Next**, **Next**
 1. Select **Choose an existing IAM role** and select the role **glue-demo-role**
@@ -399,14 +399,14 @@ We use a glue crawler to query the data from the database on S3 and create a sch
 1. Click **Add database** and enter the name *on-prem-employee-database*, click **Create**
 1. Click **Next**
     <p align="left">
-      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-crawler-details.png">
+      <img width="400" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-crawler-details.png">
     </p>
 1. Click **Finish**
 1. Place a check next to your crawler and click **Run Crawler**
 1. Wait for the crawler to run and then choose **Tables** from the left-hand menu
 1. This should show you the tables for your newly extracted data.
     <p align="left">
-      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-tables.png">
+      <img width="400" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/glue-tables.png">
     </p>
 
 </details>
