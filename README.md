@@ -29,7 +29,7 @@ In this lab you'll learn how to extract data from a local relational database, t
 </details>
 
 <details>
-<summary><strong>Deploy a database to mimic on-premesis</strong></summary><p>
+<summary><strong>Deploy a database to mimic on-premises</strong></summary><p>
 
 To demonstrate the data being held in a different location we'll build our fake database in the Ireland region using CloudFormation.
 
@@ -71,7 +71,7 @@ If you are time constrained you can stage the next **3** steps by running the fo
 <details>
 <summary><strong>Setup a Nat Gateway</strong></summary><p>
 
-Glue can only connect to the internet via a Nat Gateway for security. In reality you would be more likely to be routing from a private subnet to a database on-premesis via a VPN. However for this lab we'll configure a VPN Gateway to allow us to connect to the database we deployed with internet access in the previous step.
+Glue can only connect to the internet via a Nat Gateway for security. In reality you would be more likely to be routing from a private subnet to a database on-premises via a VPN. However for this lab we'll configure a VPN Gateway to allow us to connect to the database we deployed with internet access in the previous step.
 
 1. In the top right of the AWS console choose **London** and then select **Ireland** from the dropdown.
     <p align="left">
@@ -151,7 +151,7 @@ In order for Glue to run we need to give the service the required permissions to
 <details>
 <summary><strong>Setup a Glue Connection</strong></summary><p>
 
-In order to transfer the data from the on-premesis database we need to setup a glue connection with the database connection details.
+In order to transfer the data from the on-premises database we need to setup a glue connection with the database connection details.
 
 1. Click on the **Services** dropdown in the top right and select the service **AWS Glue**
 1. On the left-hand menu select **Connections** and click **Add Connection**
@@ -196,7 +196,7 @@ Next we'll configure Glue to perform ETL on the data to convert it to Parquet an
 <details>
 <summary><strong>Create an S3 bucket</strong></summary><p>
 
-In order to store the data extracted from the on-premesis database we'll create an S3 bucket.
+In order to store the data extracted from the on-premises database we'll create an S3 bucket.
 
 1. Click on the **Services** dropdown in the top right and select the service **S3**
 1. Click **Create Bucket**
@@ -492,6 +492,6 @@ Once the data is available in S3 we can start to query and visualisae the data. 
 </details>
 
 # Summary
-During this lab you extracted data from an "on-premesis" database, converted it to Parquet and stored the output to S3. You then used a combination of Athena and QuickSight to query and visualise the data to start exploiting it.
+During this lab you extracted data from an "on-premises" database, converted it to Parquet and stored the output to S3. You then used a combination of Athena and QuickSight to query and visualise the data to start exploiting it.
 
 This is a simple lab but could easily be expanded to pull data from multiple sources to start corelating it to gain deeper insight.
