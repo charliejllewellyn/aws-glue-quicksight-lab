@@ -62,7 +62,7 @@ Click the button below to deploy the stack.
 
 ## Prepare your VPC for Glue
 
-If you are time constrained you can stage the next **4** steps by running the following CloudFormation template. If you do this move to **Configuring a Glue Connection**
+If you are time constrained you can stage the next **3** steps by running the following CloudFormation template. If you do this move to **Configuring a Glue Connection**
 
 | AWS Region | Short name | |
 | -- | -- | -- |
