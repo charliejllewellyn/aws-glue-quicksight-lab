@@ -68,6 +68,23 @@ If you are time constrained you can stage the next **3** steps by running the fo
 | -- | -- | -- |
 | EU West (Ireland) | eu-west-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=glue-demo&templateURL=https://s3-eu-west-1.amazonaws.com/aws-shared-demo-cf-templates/glue_demo/master_template.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png"></a> |
 
+<summary><strong>Setup an S3 endpoint</strong></summary><p>
+
+In order to securely transfer data from the on-premesis database to S3 Glue uses an S3 endpoint which allows for data transfer over the AWS backbone once the data reaches your AWS VPC.
+
+In order to demonstrate the data being consumed remotely to the VPC like it would be on-premesis we'll use the London region (eu-west-2).
+
+1. Click on **endpoints** on the left-hand menu
+1. Click on **Create Endpoint**
+1. Place a check next to **com.amazonaws.eu-west-2.s3** and place a check in the routetable you created in the previous step starting **rtb-**
+    <p align="left">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/s3-endpoint.png">
+    </p>
+1. Click **Create Endpoint**
+1. Click **Close**
+
+</details>
+
 <details>
 <summary><strong>Setup a Nat Gateway</strong></summary><p>
 
