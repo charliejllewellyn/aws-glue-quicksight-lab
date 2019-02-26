@@ -56,17 +56,17 @@ Click the button below to deploy the stack.
 
 **Note:** In reality the IP would be a private address access via a VPN on Direct Connect.
 
-</details>
-
 # Data import
 
 ## Prepare your VPC for Glue
 
-If you are time constrained you can stage the next **3** steps by running the following CloudFormation template. If you do this move to **Configuring a Glue Connection**
+If you are time constrained you can stage the next **4** steps by running the following CloudFormation template. If you do this move to **Configuring a Glue Connection**
 
 | AWS Region | Short name | |
 | -- | -- | -- |
 | EU West (Ireland) | eu-west-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=glue-demo&templateURL=https://s3-eu-west-1.amazonaws.com/aws-shared-demo-cf-templates/glue_demo/master_template.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png"></a> |
+
+</details>
 
 <summary><strong>Setup an S3 endpoint</strong></summary><p>
 
