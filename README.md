@@ -507,9 +507,9 @@ Once the data is available in S3 we can start to query and visualisae the data. 
 <details>
 <summary><strong>Build some visualisations</strong></summary><p>
 
-1. Choose your visulisation type, in this case select the **bar chart** icon
+1. Choose your visulisation type, in this case select the **pie chart** icon
     <p align="left">
-      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-hor-bar.png">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-pie.png">
     </p>
 1. From the left-hand menu select **gender**
 1. Click the bar saying **Field Wells** at the top
