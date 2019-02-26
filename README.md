@@ -424,10 +424,25 @@ We use a glue crawler to query the data from the database on S3 and create a sch
 
 Once the data is available in S3 we can start to query and visualisae the data. In this section we'll be using AWS QuickSight but other products can be integrated like Tableau, or qlik.
 
+**Note:** If you haven't used quicksight before you'll need to sign-up
+
+<details>
+<summary><strong>QuickSight sign-up</strong></summary><p>
+
+1. Click on the **Services** dropdown in the top right and select the service **QuickSight**
+1. Sleect **Enterprise** for the QuickSight version
+1. Click **Continue**
+1. Enter **glue-demo** for the **QuickSight account name** and and email address for **Notification email address**
+1. Click **Finish**
+1. Click **Go to Amazon QuickSight**
+
+**Note:** It will take a couple of minutes to get QuickSight ready
+
+</details>
+
 <details>
 <summary><strong>Allow QuickSight access to your data</strong></summary><p>
 
-1. Click on the **Services** dropdown in the top right and select the service **QuickSight**
 1. In the top right-hand corner click **Admin**, **Manage QuickSight**
     <p align="left">
       <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-perms.png">
