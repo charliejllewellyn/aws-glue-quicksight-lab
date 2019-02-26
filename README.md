@@ -509,11 +509,11 @@ Once the data is available in S3 we can start to query and visualisae the data. 
 
 1. Choose your visulisation type, in this case select the **bar chart** icon
     <p align="left">
-      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-new-join.png">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-hor-bar.png">
     </p>
-1. From teh left-hand menu select **gender[employees]**
+1. From the left-hand menu select **gender**
 1. Click the bar saying **Field Wells** at the top
-1. Drag **Salaries** into the **Value** box and then click to select **Aggregate** as **Average**
+1. Drag **Salary** into the **Value** box and then click to select **Aggregate** as **Average**
     <p align="left">
       <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-vis-1.png">
     </p>
