@@ -185,8 +185,8 @@ In order to transfer the data from the on-premises database we need to setup a g
     jdbc:mysql://52.212.137.195:3306/employees
     ```
 1. Enter **Username**, *dbuser* and **Password**, *password12345*
-1. Select your **VPC** 
-1. Select any **Subnet** 
+1. Select your **VPC** created earlier, if you used the CloudFormation template it will be labeled *glue-demo*
+1. Select any private **Subnet**, e.g. *glue-demo-private-a*
 1. Select the **Security Group** with the name **on-prem-glue-demo** and choose **Next**
 1. Click **Finish**
     <p align="left">
@@ -228,7 +228,7 @@ In order to store the data extracted from the on-premises database we'll create 
 </details>
 
 <details>
-<summary><strong>Setup a Glue Connection</strong></summary><p>
+<summary><strong>Create a Glue Job</strong></summary><p>
 
 1. Click on the **Services** dropdown in the top right and select the service **AWS Glue**
 1. On the left-hand menu select **Jobs**
