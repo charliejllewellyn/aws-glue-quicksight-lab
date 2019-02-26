@@ -430,7 +430,7 @@ Once the data is available in S3 we can start to query and visualisae the data. 
 1. Click on the **Services** dropdown in the top right and select the service **QuickSight**
 1. In the top right-hand corner click **Admin**, **Manage QuickSight**
     <p align="left">
-      <img width="400" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-perms.png">
+      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-perms.png">
     </p>
 1. In the left-hand menu click **Account Settings**
 1. Click **Manage QuickSight permissions**
