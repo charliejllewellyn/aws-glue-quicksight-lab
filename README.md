@@ -432,7 +432,7 @@ Once the data is available in S3 we can start to query and visualisae the data. 
 1. Click on the **Services** dropdown in the top right and select the service **QuickSight**
 1. Select **Enterprise** for the QuickSight version
     <p align="left">
-      <img width="200" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-signup.png">
+      <img width="400" src="https://github.com/charliejllewellyn/aws-glue-quicksight-lab/blob/master/images/qs-signup.png">
     </p>
 1. Click **Continue**
 1. Enter **glue-demo** for the **QuickSight account name** and and email address for **Notification email address**
